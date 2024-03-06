@@ -1,0 +1,66 @@
+/* ===== Google Font Import - Poppins ===== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
+*{
+    font-family: 'Poppins', sans-serif;
+}
+
+.container {
+    display: flex;
+}
+
+.container.space-around {
+    justify-content: space-around;
+}
+
+.container.space-between {
+    justify-content: space-between;
+    font-size: 15px;
+    line-height: 2;
+}
+
+.tg {
+    border-collapse: collapse;
+    border-color: #ccc;
+    border-spacing: 0;
+}
+
+.tg td {
+    background-color: #fff;
+    border-color: #ccc;
+    border-style: solid;
+    border-width: 2px;
+    color: rgb(0, 0, 0);
+    font-family: Arial, sans-serif;
+    font-size: 22px;
+    overflow: hidden;
+    padding: 5px 20px;
+    word-break: normal;
+}
+
+.tg th {
+    background-color: #f0f0f0;
+    border-color: #ccc;
+    border-style: solid;
+    border-width: 2px;
+    color: rgb(0, 0, 0);
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+    font-weight: normal;
+    overflow: hidden;
+    padding: 15px 20px;
+    word-break: normal;
+}
+
+.tg .tg-0lax {
+    font-size: 25px;
+    border-color: inherit;
+    text-align: center;
+    vertical-align: middle
+}
+
+.tg .tg-kxfu {
+    font-size: 28px;
+    border-color: inherit;
+    text-align: center;
+    vertical-align: middle
+}
