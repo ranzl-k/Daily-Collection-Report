@@ -24,7 +24,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-    <script> 
+    <script>
         function GetDetail(str) {
             // Creates a new XMLHttpRequest object 
             var xmlhttp = new XMLHttpRequest();
@@ -44,14 +44,14 @@
                     // a variable assign the value  
                     // received to first name input field 
 
-                    document.getElementById("gross_yesterday").value = myObj[0];
-                    document.getElementById("nett_yesterday").value = myObj[1];
-                    document.getElementById("ds").value = myObj[2];
-                    document.getElementById("es").value = myObj[3];
+                    document.getElementById("gross").value = myObj[0];
+                    document.getElementById("nett").value = myObj[1];
+                    document.getElementById("distShr").value = myObj[2];
+                    document.getElementById("eShr").value = myObj[3];
                 }
             };
 
-            xmlhttp.open("GET", "send.php?ydate=" + str, true);
+            xmlhttp.open("GET", "send.php?yestDate=" + str, true);
 
             // Sends the request to the server 
             xmlhttp.send();
@@ -154,15 +154,13 @@
                     <i class="uil uil-navigator"></i>
                 </button>
             </div>
-        </form>
 
-        <form method="POST" enctype="multipart/form-data">
             <span class="title">Previous Show</span>
 
             <div class="fields">
                 <div class="input-field">
-                    <label for="ydate">Yesterday</label>
-                    <input type="date" name="ydate" id="ydate" placeholder="Date" onchange="GetDetail(this.value)" required>
+                    <label for="yestDate">Yesterday</label>
+                    <input type="date" name="yestDate" id="yestDate" placeholder="Date" onchange="GetDetail(this.value)" required>
                 </div>
 
                 <div class="input-field">
@@ -178,26 +176,27 @@
 
             <div class="fields">
                 <div class="input-field">
-                    <label for="gross_yesterday">Gross</label>
-                    <input type="text" name="gross_yesterday" id="gross_yesterday" placeholder="Gross" value="">
+                    <label for="gross">Gross</label>
+                    <input type="text" name="gross" id="gross" placeholder="Gross" value="">
                 </div>
 
                 <div class="input-field">
-                    <label for="nett_yesterday">Nett</label>
-                    <input type="text" name="nett_yesterday" id="nett_yesterday" placeholder="Nett" value="">
+                    <label for="nett">Nett</label>
+                    <input type="text" name="nett" id="nett" placeholder="Nett" value="">
                 </div>
             </div>
             <div class="fields">
                 <div class="input-field">
-                    <label for="ds">DS</label>
-                    <input type="text" name="ds" id="ds" placeholder="DS" value="">
+                    <label for="distShr">DS</label>
+                    <input type="text" name="distShr" id="distShr" placeholder="DS" value="">
                 </div>
 
                 <div class="input-field">
-                    <label for="es">ES</label>
-                    <input type="text" name="es" id="es" placeholder="ES" value="">
+                    <label for="eShr">ES</label>
+                    <input type="text" name="eShr" id="eShr" placeholder="ES" value="">
                 </div>
             </div>
+        </form>
     </div>
     <script src="script.js"></script>
 </body>
