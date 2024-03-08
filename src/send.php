@@ -1,6 +1,6 @@
 <?php
-$username = "root"; // Replace with your MySQL username
-$password = "root"; // Replace with your MySQL password
+$username = "root";
+$password = "root";
 $dbname = "dcr";
 $servername = "mysql_db";  // Use the hostname set in the docker-compose.yml
 $port = 3306;  // MySQL port number
@@ -12,32 +12,45 @@ $conn = new mysqli($servername, $username, $password, '', $port);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+
+$query = "CREATE DATABASE IF NOT EXISTS dcr";
+$conn->query($query);
+
 $conn->select_db($dbname);
 
-$ydate = $_REQUEST['ydate'];
+$query = "CREATE TABLE IF NOT EXISTS collection (
+        date DATE PRIMARY KEY,
+        gross VARCHAR(255) NOT NULL,
+        nett VARCHAR(255) NOT NULL,
+        distShr VARCHAR(255) NOT NULL,
+        eShr VARCHAR(255) NOT NULL
+    )";
+$conn->query($query);
+
+$yestDate = $_REQUEST['yestDate'];
 
 // Query to retrieve data from the "collection" table
-$query = "SELECT * FROM collection WHERE date LIKE '%$ydate%'";
-
+$query = "SELECT * FROM collection WHERE date LIKE '%$yestDate%'";
 $result = $conn->query($query);
 
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        $gross_yesterday = $row["gross"];
-        $nett_yesterday = $row["nett"];
-        $ds_yesterday = $row["distShr"];
-        $es_yesterday = $row["eShr"];
+        $gross = $row["gross"];
+        $nett = $row["nett"];
+        $distShr = $row["distShr"];
+        $eShr = $row["eShr"];
     }
 } else {
-    $gross_yesterday = 0;
-    $nett_yesterday = 0;
-    $ds_yesterday = 0;
-    $es_yesterday = 0;
+    $gross = 0;
+    $nett = 0;
+    $distShr = 0;
+    $eShr = 0;
 }
 
-$data = array("$gross_yesterday", "$nett_yesterday", "$ds_yesterday", "$es_yesterday");
+$data = array("$gross", "$nett", "$distShr", "$eShr");
 
 // Send in JSON encoded form 
 $myJSON = json_encode($data);
 echo $myJSON;
+
 ?>
