@@ -57,21 +57,21 @@ $gross_7 = $sold_7 * $rate_R;
 $gross_8 = $sold_8 * $rate_I;
 
 $GST_1_RS = $GST_R * $sold_1;
-$GST_1_PS = bcdiv($GST_1_RS - intval($GST_1_RS),1,2);
+$GST_1_PS = bcdiv($GST_1_RS - intval($GST_1_RS), 1, 2);
 $GST_2_RS = $GST_I * $sold_2;
-$GST_2_PS = bcdiv($GST_2_RS - intval($GST_2_RS),1,2);
+$GST_2_PS = bcdiv($GST_2_RS - intval($GST_2_RS), 1, 2);
 $GST_3_RS = $GST_R * $sold_3;
-$GST_3_PS = bcdiv($GST_3_RS - intval($GST_3_RS),1,2);
+$GST_3_PS = bcdiv($GST_3_RS - intval($GST_3_RS), 1, 2);
 $GST_4_RS = $GST_I * $sold_4;
-$GST_4_PS = bcdiv($GST_4_RS - intval($GST_4_RS),1,2);
+$GST_4_PS = bcdiv($GST_4_RS - intval($GST_4_RS), 1, 2);
 $GST_5_RS = $GST_R * $sold_5;
-$GST_5_PS = bcdiv($GST_5_RS - intval($GST_5_RS),1,2);
+$GST_5_PS = bcdiv($GST_5_RS - intval($GST_5_RS), 1, 2);
 $GST_6_RS = $GST_I * $sold_6;
-$GST_6_PS = bcdiv($GST_6_RS - intval($GST_6_RS),1,2);
+$GST_6_PS = bcdiv($GST_6_RS - intval($GST_6_RS), 1, 2);
 $GST_7_RS = $GST_R * $sold_7;
-$GST_7_PS = bcdiv($GST_7_RS - intval($GST_7_RS),1,2);
+$GST_7_PS = bcdiv($GST_7_RS - intval($GST_7_RS), 1, 2);
 $GST_8_RS = $GST_I * $sold_8;
-$GST_8_PS = bcdiv($GST_8_RS - intval($GST_8_RS),1,2);
+$GST_8_PS = bcdiv($GST_8_RS - intval($GST_8_RS), 1, 2);
 
 $sold_R_total = $sold_1 + $sold_3 + $sold_5 + $sold_7;
 $sold_I_total = $sold_2 + $sold_4 + $sold_6 + $sold_8;
@@ -80,21 +80,27 @@ $gst_total_R = $sold_R_total * $GST_R;
 $gst_total_I = $sold_I_total * $GST_I;
 $gst_total =  $gst_total_R + $gst_total_I;
 $gst_total_RS = intval($gst_total);
-$gst_total_PS = bcdiv(($gst_total - $gst_total_RS),1,2);
+$gst_total_PS = bcdiv(($gst_total - $gst_total_RS), 1, 2);
 
 $gross_total_R = $sold_R_total * $rate_R;
 $gross_total_I = $sold_I_total * $rate_I;
-$gross_today = round(($gross_total_R + $gross_total_I),2);
-$nett_today = round(($gross_today - ($gst_total + $batta + $kfcc)),2);
-$ds_today = round(($nett_today * $ds_rate),2);
-$es_today = round(($nett_today * (1 - $ds_rate)),2);
+$gross_today = round(($gross_total_R + $gross_total_I), 2);
+$nett_today = round(($gross_today - ($gst_total + $batta + $kfcc)), 2);
+$ds_today = round(($nett_today * $ds_rate), 2);
+$es_today = round(($nett_today * (1 - $ds_rate)), 2);
 
 $gross = $gross_yesterday + $gross_today;
 $nett = $nett_yesterday + $nett_today;
 $distShr = $ds_yesterday + $ds_today;
 $eShr = $es_yesterday + $es_today;
 
-$query = "INSERT INTO collection (date, gross, nett, distShr, eShr) VALUES ('$date', '$gross','$nett', '$distShr', '$eShr')";
+$query = "INSERT INTO collection 
+            (date, gross, nett, distShr, eShr) VALUES 
+            ('$date', '$gross','$nett', '$distShr', '$eShr') ON DUPLICATE KEY UPDATE 
+            gross = $gross,
+            nett = $nett,
+            distShr = $distShr,
+            eShr = $eShr";
 $conn->query($query);
 
 // Close the database connection
