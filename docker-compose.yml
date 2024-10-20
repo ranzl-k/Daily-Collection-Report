@@ -12,7 +12,5 @@ services:
 
   mysql_db:
     image: mariadb:latest
-    volumes:
-      - ./db/my.cnf:/etc/mysql/conf.d/my.cnf
     environment:
       MARIADB_ROOT_PASSWORD: root
