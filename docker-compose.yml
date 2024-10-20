@@ -1,5 +1,3 @@
-version: '3.9'
-
 services:
   php-env:
     build:
@@ -8,33 +6,19 @@ services:
     volumes:
       - ./src:/var/www/html
     ports:
-      - 8080:80
+      - 80:80
     depends_on:
       - mysql_db
 
   mysql_db:
-    image: mysql:5.7
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-
-  phpmyadmin:
-    image: phpmyadmin:latest
-    restart: always
-    ports:
-      - 8081:80
-    environment:
-      PMA_ARBITRARY: 1  
-    depends_on:
-      - mysql_db
-
-  app:
-    image: 'jc21/nginx-proxy-manager:latest'
-    restart: unless-stopped
-    ports:
-      - '80:80'
-      - '81:81'
-      - '443:443'
+    image: mariadb:latest
     volumes:
-      - ./data:/data
-      - ./letsencrypt:/etc/letsencrypt
+      - ./db/my.cnf:/etc/mysql/conf.d/my.cnf
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8082:8080
