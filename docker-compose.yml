@@ -9,6 +9,7 @@ services:
       - 80:80
     depends_on:
       - mysql_db
+    container_name: Daily-Collection-Report
 
   mysql_db:
     image: mariadb:latest
