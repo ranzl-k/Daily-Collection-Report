@@ -2,7 +2,6 @@
 ?>
 
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
@@ -12,16 +11,13 @@
 
     <!----======== CSS ======== -->
     <link rel="stylesheet" href="formstyle.css">
-
     <!----===== Iconscout CSS ===== -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
 
     <title>Daily Collection Report</title>
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="text/javascript"></script>
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <script>
@@ -52,7 +48,6 @@
             };
 
             xmlhttp.open("GET", "send.php?yestDate=" + str, true);
-
             // Sends the request to the server 
             xmlhttp.send();
         }

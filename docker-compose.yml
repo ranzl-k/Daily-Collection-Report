@@ -2,7 +2,8 @@ services:
   dcr:
     build:
       context: .  
-      dockerfile: Dockerfile 
+      dockerfile: Dockerfile
+    restart: always
     volumes:
       - ./src:/var/www/html
     ports:
@@ -12,6 +13,7 @@ services:
 
   mysql_db:
     image: mariadb:latest
+    restart: always
     volumes:
       - ./db/my.cnf:/etc/mysql/conf.d/my.cnf
     environment:
